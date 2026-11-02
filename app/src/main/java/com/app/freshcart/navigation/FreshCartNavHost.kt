@@ -42,12 +42,12 @@ fun FreshCartNavHost(
                         popUpTo(Screen.Splash.route) { inclusive = true }
                     }
                 },
-                onNavigateToAdminHome = {
+                onNavigateToAdmin = {
                     navController.navigate(Screen.AdminDashboard.route) {
                         popUpTo(Screen.Splash.route) { inclusive = true }
                     }
                 },
-                onNavigateToUserHome = {
+                onNavigateToHome = {
                     navController.navigate(Screen.UserHome.route) {
                         popUpTo(Screen.Splash.route) { inclusive = true }
                     }
@@ -58,13 +58,13 @@ fun FreshCartNavHost(
         // Login Screen
         composable(Screen.Login.route) {
             LoginScreen(
-                onLoginSuccess = { role ->
-                    val destination = if (role == UserRole.ADMIN) {
-                        Screen.AdminDashboard.route
-                    } else {
-                        Screen.UserHome.route
+                onNavigateToUserHome = {
+                    navController.navigate(Screen.UserHome.route) {
+                        popUpTo(Screen.Login.route) { inclusive = true }
                     }
-                    navController.navigate(destination) {
+                },
+                onNavigateToAdminDashboard = {
+                    navController.navigate(Screen.AdminDashboard.route) {
                         popUpTo(Screen.Login.route) { inclusive = true }
                     }
                 }

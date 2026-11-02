@@ -50,10 +50,7 @@ class CartRepositoryImpl @Inject constructor(
             if (newQuantity <= 0) {
                 cartDao.deleteCartItemById(cartItemId)
             } else {
-                val current = cartDao.getCartItem(userId, cartItemId)
-                if (current != null) {
-                    cartDao.updateCartItem(current.copy(quantity = newQuantity))
-                }
+                cartDao.updateQuantityById(cartItemId, newQuantity)
             }
             Resource.Success(Unit)
         } catch (e: Exception) {
