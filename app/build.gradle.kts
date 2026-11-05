@@ -38,6 +38,16 @@ android {
     }
 }
 
+androidComponents {
+    onVariants { variant ->
+        if (variant.name == "debug") {
+            variant.outputs.forEach { output ->
+                output.outputFileName.set("freshCard_${variant.name}.apk")
+            }
+        }
+    }
+}
+
 dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)

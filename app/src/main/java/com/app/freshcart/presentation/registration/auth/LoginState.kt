@@ -1,4 +1,4 @@
-package com.app.freshcart.presentation.auth
+package com.app.freshcart.presentation.registration.auth
 
 import com.app.freshcart.common.UserRole
 import com.app.freshcart.domain.model.User

@@ -1,6 +1,6 @@
-package com.app.freshcart.presentation.auth
+package com.app.freshcart.presentation.registration.auth
 
-import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -46,11 +46,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -61,7 +61,6 @@ import com.app.freshcart.ui.theme.FreshBackground
 import com.app.freshcart.ui.theme.FreshCardBorder
 import com.app.freshcart.ui.theme.FreshGreenContainer
 import com.app.freshcart.ui.theme.FreshGreenPrimary
-import com.app.freshcart.ui.theme.FreshOrangeAccent
 import com.app.freshcart.ui.theme.FreshTextPrimary
 import com.app.freshcart.ui.theme.FreshTextSecondary
 
@@ -69,6 +68,8 @@ import com.app.freshcart.ui.theme.FreshTextSecondary
 fun LoginScreen(
     onNavigateToUserHome: () -> Unit,
     onNavigateToAdminDashboard: () -> Unit,
+    onNavigateToSignUp:()->Unit,
+    onNavigateToResetPassword:()-> Unit,
     viewModel: LoginViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -158,7 +159,7 @@ fun LoginScreen(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(20.dp),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
-                border = androidx.compose.foundation.BorderStroke(1.dp, FreshCardBorder),
+                border = BorderStroke(1.dp, FreshCardBorder),
                 elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
             ) {
                 Column(
@@ -225,7 +226,7 @@ fun LoginScreen(
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
                     )
 
-                    // Forgot Password Row
+                    // Demo Password Row
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.End
@@ -234,13 +235,31 @@ fun LoginScreen(
                             onClick = { viewModel.fillDemoCredentials() }
                         ) {
                             Text(
-                                text = "Auto-fill Demo Credentials",
+                                text = "Demo Password",
                                 style = MaterialTheme.typography.bodySmall.copy(
                                     color = FreshGreenPrimary,
                                     fontWeight = FontWeight.SemiBold
                                 )
                             )
                         }
+                    }
+
+                   // Reset Password Row
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(end=12.dp),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        Text(
+                            modifier = Modifier.clickable{
+                                onNavigateToResetPassword()
+                            },
+                            text = "Reset Password",
+                            style = MaterialTheme.typography.bodySmall.copy(
+                                color = FreshGreenPrimary,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                        )
+
                     }
 
                     Spacer(modifier = Modifier.height(8.dp))
@@ -251,12 +270,37 @@ fun LoginScreen(
                         onClick = { viewModel.login() },
                         isLoading = uiState.isLoading
                     )
+
+                    Spacer(modifier = Modifier.height(15.dp))
+
+                    // Sign-Up Row
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        TextButton(
+                            onClick = {
+                                onNavigateToSignUp()
+                            }
+                        ) {
+                            Text(
+                                text = "Sign-Up",
+                                style = MaterialTheme.typography.bodySmall.copy(
+                                    color = FreshGreenPrimary,
+                                    fontWeight = FontWeight.SemiBold
+                                )
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
                 }
             }
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            // Demo Credentials Helper Note
+           /* // Demo Credentials Helper Note
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -286,7 +330,7 @@ fun LoginScreen(
                         )
                     )
                 }
-            }
+            }*/
 
             Spacer(modifier = Modifier.height(24.dp))
         }
@@ -329,7 +373,7 @@ fun RoleSelector(
 @Composable
 fun RoleTab(
     title: String,
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    icon: ImageVector,
     isSelected: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier

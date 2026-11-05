@@ -8,12 +8,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.app.freshcart.common.UserRole
 import com.app.freshcart.presentation.admin.category.AdminCategoriesScreen
 import com.app.freshcart.presentation.admin.dashboard.AdminDashboardScreen
 import com.app.freshcart.presentation.admin.orders.AdminOrdersScreen
 import com.app.freshcart.presentation.admin.product.AdminProductsScreen
-import com.app.freshcart.presentation.auth.LoginScreen
+import com.app.freshcart.presentation.registration.auth.LoginScreen
+import com.app.freshcart.presentation.registration.reset.ResetPasswordScreen
+import com.app.freshcart.presentation.registration.signUp.SignUpScreen
 import com.app.freshcart.presentation.splash.SplashScreen
 import com.app.freshcart.presentation.user.cart.CartScreen
 import com.app.freshcart.presentation.user.category.CategoryProductsScreen
@@ -67,9 +68,42 @@ fun FreshCartNavHost(
                     navController.navigate(Screen.AdminDashboard.route) {
                         popUpTo(Screen.Login.route) { inclusive = true }
                     }
+                },
+                onNavigateToSignUp = {
+                    navController.navigate(Screen.SignUp.route) {
+                        popUpTo(Screen.Login.route) { inclusive = true }
+                    }
+                },
+                onNavigateToResetPassword = {
+                    navController.navigate(Screen.RestPassword.route) {
+                        popUpTo(Screen.Login.route) { inclusive = true }
+                    }
                 }
             )
         }
+
+        //To Sign-In
+        composable(Screen.SignUp.route) {
+            SignUpScreen(
+                onNavigateToLoginScreen = {
+                    navController.navigate(Screen.Login.route) {
+                        popUpTo(Screen.SignUp.route) { inclusive = true }
+                    }
+                }
+            )
+        }
+
+        //To Reset Password
+        composable(Screen.RestPassword.route) {
+            ResetPasswordScreen(
+                onNavigateToLoginScreen = {
+                    navController.navigate(Screen.Login.route) {
+                        popUpTo(Screen.RestPassword.route) { inclusive = true }
+                    }
+                }
+            )
+        }
+
 
         // Admin Dashboard
         composable(Screen.AdminDashboard.route) {

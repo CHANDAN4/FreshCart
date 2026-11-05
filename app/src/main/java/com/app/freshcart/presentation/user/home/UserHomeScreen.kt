@@ -94,13 +94,18 @@ fun UserHomeScreen(
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
-            UserHomeHeader(
-                address = state.user?.address ?: "Select delivery location",
-                userName = state.user?.name ?: "Customer",
-                cartCount = state.cartCount,
-                onCartClick = onNavigateToCart,
-                onProfileClick = onNavigateToProfile
-            )
+            Box(
+                modifier = Modifier.padding(top = 30.dp)
+            ) {
+                UserHomeHeader(
+                    address = state.user?.address ?: "Select delivery location",
+                    userName = state.user?.name ?: "Customer",
+                    cartCount = state.cartCount,
+                    onCartClick = onNavigateToCart,
+                    onProfileClick = onNavigateToProfile
+                )
+            }
+
         }
     ) { paddingValues ->
         if (state.isLoading && state.categories.isEmpty() && state.allProducts.isEmpty()) {
@@ -234,7 +239,7 @@ fun UserHomeScreen(
                     }
 
                     // Products Grouped by Category
-                    state.categories.forEach { category ->
+                    /*state.categories.forEach { category ->
                         val categoryProducts = state.allProducts.filter { it.categoryId == category.id }
                         if (categoryProducts.isNotEmpty()) {
                             item {
@@ -258,11 +263,12 @@ fun UserHomeScreen(
                                 }
                             }
                         }
-                    }
+                    }*/
 
                     item {
                         Spacer(modifier = Modifier.height(24.dp))
                     }
+
                 }
             }
         }
@@ -290,7 +296,7 @@ private fun UserHomeHeader(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 10.dp),
+                .padding( horizontal = 16.dp, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {

@@ -15,8 +15,7 @@ import com.app.freshcart.data.local.entity.OrderItemEntity
 import com.app.freshcart.data.local.entity.ProductEntity
 import com.app.freshcart.data.local.entity.UserEntity
 
-@Database(
-    entities = [
+@Database(entities = [
         UserEntity::class,
         CategoryEntity::class,
         ProductEntity::class,

@@ -1,4 +1,4 @@
-package com.app.freshcart.presentation.auth
+package com.app.freshcart.presentation.registration.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

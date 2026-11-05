@@ -5,6 +5,10 @@ sealed class Screen(val route: String) {
     data object Splash : Screen("splash_screen")
     data object Login : Screen("login_screen")
 
+    data object SignUp : Screen("sign_up_screen")
+
+    data object RestPassword : Screen("reset_password_screen")
+
     // Admin Routes
     data object AdminDashboard : Screen("admin_dashboard_screen")
     data object AdminCategories : Screen("admin_categories_screen")
